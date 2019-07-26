@@ -1,0 +1,99 @@
+body, html {
+	height: 100%;
+	margin: 0;
+}
+
+.start, .bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4 {
+	position: relative;
+	
+	/* Create the parallax scrolling effect */
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.start {
+	background-image: url("bgimg-0.png");
+	min-height: 100%;
+}
+
+.bgimg-1 {
+	background-image: url("bgimg-1.png");
+	min-height: 70%;
+}
+
+.bgimg-2 {
+	background-image: url("bgimg-2.png");
+	min-height: 70%;
+}
+
+.bgimg-3 {
+	background-image: url("bgimg-3.png");
+	min-height: 70%;
+}
+
+.bgimg-4 {
+	background-image: url("bgimg-4.png");
+	min-height: 70%;
+}
+
+.mytitle {
+	height: 500px;
+	font-family: "Arial", sans-serif;
+	font-size: 52px;
+	text-align: justify;
+	padding: 80px 110px;
+	color: White;
+	background-color: DodgerBlue;
+}
+
+.problem {
+	height: 500px;
+	font-family: "Arial", sans-serif;
+	font-size: 36px;
+	text-align: justify;
+	padding: 80px 110px;
+	color: White;
+	background-color: DodgerBlue;
+}
+
+.button {
+	position: relative;
+	background-color: #33cc33;
+	border: none;
+	font-size: 22px;
+	color: #FFFFFF;
+	padding: 20px;
+	width: 150px;
+	text-align: center;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	text-decoration: none;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.button:hover {
+	box-shadow: 6px 6px 16px 0 rgba(0, 0, 0, 0.25), -6px 6px 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+.button:after {
+	content: "";
+	background: #98e698;
+	display: block;
+	position: absolute;
+	padding-top: 200%;
+	padding-left: 350%;
+	margin-left: -150px;
+	margin-top: -150px;
+	opacity: 0; /* final opacity */
+	transition-duration: 0.6s;
+}
+
+.button:active:after { /* Generate an object after click */
+	padding: 0;
+	margin: 0;
+	opacity: 1;
+	transition: 0s;
+}
