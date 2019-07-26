@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
+
+<!--- Head --->
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
+<!--- End of Head --->
 
+<!--- Body --->
 <body>
 
 <div class="startEnd"></div>
@@ -15,92 +19,195 @@
 
 <div class="bgimg-1"></div>
 
+<!--- Problem 1 --->
 <div class="problem">
 <h2 style="text-align: center">Problem 1</h2>
 <p>Please list the maximum number of enemy knockdowns (DBNOs) per match
 (matchId), and sort by the number of knockdowns (DBNOs) from top to bottom and
 then list top 20.</p>
+<p>SQL Query :</p>
+<pre class="sqlQuery"> <!--- Use Accordion --->
+SELECT matchId, MAX(DBNOs) AS DBNOs
+FROM player_statistic
+GROUP BY matchId
+ORDER BY DBNOs DESC
+LIMIT 20;
+</pre>
 <button class="button">Send</button>
 </div>
+<!--- End of Problem 1 --->
 
 <div class="bgimg-2"></div>
 
+<!--- Problem 2 --->
 <div class="problem">
 <h2 style="text-align: center">Problem 2</h2>
 <p>Please list the player ID, match ID and total damage dealt(damageDealt) which
 total damage dealt (damageDealt) is between 2000 and 2010.</p>
+<p>SQL Query</p>
+<pre class="sqlQuery">
+SELECT Id, matchId, damageDealt
+FROM player_statistic
+WHERE damageDealt BETWEEN 2000 AND 2010;
+</pre>
 <button class="button">Send</button>
 </div>
+<!--- End of Problem 2 --->
 
 <div class="bgimg-3"></div>
 
+<!--- Problem 3 --->
 <div class="problem">
 <h2 style="text-align: center">Problem 3</h2>
 <p>Please list the types of matches with "fpp" in the match type (matchType) and the
 number of each match type, then sort by the count from small to large.</p>
+<p>SQL Query</p>
+<pre class="sqlQuery">
+SELECT matchType, COUNT(matchType) AS count
+FROM `match`
+WHERE matchType LIKE "%fpp%"
+GROUP BY matchType
+ORDER BY COUNT(matchType);
+</pre>
 <button class="button">Send</button>
 </div>
+<!--- End of Problem 3 --->
 
 <div class="bgimg-4"></div>
 
+<!--- Problem 4 --->
 <div class="problem">
 <h2 style="text-align: center">Problem 4</h2>
 <p>Please find the players who have participated in a match which the number of
 teams (numGroup) is less than or equal to 10, and list the top 20 player ID in the
 average number of kills in all games and their average number of kills (kills).</p>
+<p>SQL Query</p>
+<pre class="sqlQuery">
+SELECT Id, AVG(kills) AS avgKills
+FROM (SELECT Id, matchId, kills FROM player_statistic) AS player
+	   JOIN 
+	   (SELECT matchId FROM `match` WHERE numGroups <= 10) AS matchIdOnly
+	   USING(matchId)
+GROUP BY Id
+ORDER BY AVG(kills) DESC
+LIMIT 20;
+</pre>
 <button class="button">Send</button>
 </div>
+<!--- End of Problem 4 --->
 
 <div class="bgimg-5"></div>
 
+<!--- Problem 5 --->
 <div class="problem">
 <h2 style="text-align: center">Problem 5</h2>
 <p>Please list the average duration (matchDuration) of each match type (matchType),
 and sort the result using average duration in ascending order.</p>
+<p>SQL Query</p>
+<pre class="sqlQuery">
+SELECT matchType, AVG(matchDuration)
+FROM `match`
+GROUP BY matchType
+ORDER BY AVG(matchDuration);
+</pre>
 <button class="button">Send</button>
 </div>
+<!--- End of Problem 5 --->
 
 <div class="bgimg-6"></div>
 
+<!--- Problem 6 --->
 <div class="problem">
 <h2 style="text-align: center">Problem 6</h2>
 <p>Please list walk distances, swim distance, ride distance and the total distance
 between the players who have walked, swam and ridden on vehicles in a game, and
 the total distance is from large to small. List the first 10 rows of data(using query).</p>
+<p>SQL Query</p>
+<pre class="sqlQuery">
+SELECT totalDistance, walkDistance, swimDistance, rideDistance
+FROM (SELECT walkDistance + swimDistance + rideDistance AS totalDistance, walkDistance, swimDistance, rideDistance 
+	     FROM player_statistic 
+	     WHERE walkDistance > 0 AND swimDistance > 0 AND rideDistance > 0) AS playerDistance
+ORDER BY totalDistance DESC
+LIMIT 10;
+</pre>
 <button class="button">Send</button>
 </div>
+<!--- End of Problem 6 --->
 
 <div class="bgimg-7"></div>
 
+<!--- Problem 7 --->
 <div class="problem">
 <h2 style="text-align: center">Problem 7</h2>
 <p>Please show how many players who join a match with duration (matchDuration)
 higher than the average duration of all competitions, and do not have any damage
 (damageDealt) but win the first place (winPlacePerc). Also, show their maximum
 medical supplies used (heals).</p>
+<p>SQL Query</p>
+<pre class="sqlQuery">
+SELECT COUNT(Id) AS numberOfPlayers, MAX(heals) AS maxHeals
+FROM (SELECT Id, matchId, damageDealt, winPlacePerc, heals 
+	     FROM player_statistic
+	     WHERE damageDealt = 0 AND winPlacePerc = 1) AS player
+	    JOIN
+	    (SELECT matchId
+	     FROM `match`
+	     WHERE matchDuration > ALL (SELECT AVG(matchDuration) AS avgDuration FROM `match`)) AS targetMatch
+	    USING(matchId);
+</pre>
 <button class="button">Send</button>
 </div>
+<!--- End of Problem 7 --->
 
 <div class="bgimg-8"></div>
 
+<!--- Problem 8 --->
 <div class="problem">
 <h2 style="text-align: center">Problem 8</h2>
 <p>In the match type of "squad" and "squad-fpp", please list the average ranking of
 teams (winPlacePerc) with the same number of team road kills (roadKills), and sort
 the total number of kills by descending order.</p>
+<p>SQL Query</p>
+<pre class="sqlQuery">
+SELECT teamRoadKills, AVG(winPlacePerc) AS avgWinPlacePerc
+FROM (SELECT matchId, SUM(roadKills) AS teamRoadKills, AVG(winPlacePerc) AS winPlacePerc
+	     FROM player_statistic
+	     GROUP BY groupId, matchId)AS player
+	    JOIN
+	    (SELECT matchId
+	     FROM `match`
+	     WHERE matchType LIKE "squad%") AS matchIdOnly
+	    USING(matchId)
+GROUP BY teamRoadKills
+ORDER BY teamRoadKills DESC;
+</pre>
 <button class="button">Send</button>
 </div>
+<!--- End of Problem 8 --->
 
 <div class="bgimg-9"></div>
 
+<!--- Problem Bonus --->
 <div class="problem">
 <h2 style="text-align: center">Bonus</h2>
-<p>Please list Id, weaponAcquired, demageDealt of players who have acquired many weapons but haven't gave much damage.
-Sort the weaponAcquired in descending order and list first 20 players.
+<p>Please list Id, weaponAcquired, demageDealt of players who have acquired many weapons but damage dealt is 0.
+Sort the weaponAcquired in descending order and list first 20 players.</p>
+<p>SQL Query</p>
+<pre class="sqlQuery">
+SELECT Id, weaponsAcquired, damageDealt
+FROM player_statistic
+WHERE damageDealt = 0
+ORDER BY weaponsAcquired DESC
+LIMIT 20;
+</pre>
 <button class="button">Send</button>
 </div>
+<!--- End of Problem Bonus --->
 
 <div class="startEnd"></div>
 
 </body>
+<!--- End of Body --->
+
 </html>

@@ -75,13 +75,20 @@ body, html {
 }
 
 .problem {
-	height: 500px;
+	height: 600px;
 	font-family: "Arial", sans-serif;
 	font-size: 28px;
 	text-align: justify;
 	padding: 60px 90px;
 	color: White;
 	background-color: DodgerBlue;
+}
+
+.sqlQuery {
+	font-family: "Arial", sans-serif;
+	font-size: 20px;
+	color: White;
+	text-shadow: 2px 2px 4px black;
 }
 
 .button {
