@@ -1,132 +1,131 @@
 body, html {
-	height: 100%;
-	margin: 0;
+    height: 100%;
+    margin: 0;
 }
 
 .startEnd, .bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4,
 .bgimg-5, .bgimg-6, .bgimg-7, .bgimg-8, .bgimg-9 {
-	position: relative;
-	
-	/* Create the parallax scrolling effect */
-	background-attachment: fixed;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
+    position: relative;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .startEnd {
-	background-image: url("bgimg-0.png");
-	min-height: 100%;
+    background-image: url("bgimg-0.png");
+    min-height: 100%;
 }
 
 .bgimg-1 {
-	background-image: url("bgimg-1.png");
-	min-height: 70%;
+    background-image: url("bgimg-1.png");
+    min-height: 70%;
 }
 
 .bgimg-2 {
-	background-image: url("bgimg-2.png");
-	min-height: 70%;
+    background-image: url("bgimg-2.png");
+    min-height: 70%;
 }
 
 .bgimg-3 {
-	background-image: url("bgimg-3.png");
-	min-height: 70%;
+    background-image: url("bgimg-3.png");
+    min-height: 70%;
 }
 
 .bgimg-4 {
-	background-image: url("bgimg-4.png");
-	min-height: 70%;
+    background-image: url("bgimg-4.png");
+    min-height: 70%;
 }
 
 .bgimg-5 {
-	background-image: url("bgimg-5.png");
-	min-height: 70%;
+    background-image: url("bgimg-5.png");
+    min-height: 70%;
 }
 
 .bgimg-6 {
-	background-image: url("bgimg-6.png");
-	min-height: 70%;
+    background-image: url("bgimg-6.png");
+    min-height: 70%;
 }
 
 .bgimg-7 {
-	background-image: url("bgimg-7.png");
-	min-height: 70%;
+    background-image: url("bgimg-7.png");
+    min-height: 70%;
 }
 
 .bgimg-8 {
-	background-image: url("bgimg-8.jpg");
-	min-height: 70%;
+    background-image: url("bgimg-8.jpg");
+    min-height: 70%;
 }
 
 .bgimg-9 {
-	background-image: url("bgimg-9.png");
-	min-height: 70%;
+    background-image: url("bgimg-9.png");
+    min-height: 70%;
 }
 
 .mytitle {
-	height: 500px;
-	font-family: "Arial", sans-serif;
-	font-size: 34px;
-	text-align: justify;
-	padding: 80px 110px;
-	color: White;
-	background-color: DodgerBlue;
+    height: 500px;
+    font-family: "Arial", sans-serif;
+    font-size: 34px;
+    text-align: justify;
+    padding: 80px 110px;
+    color: White;
+    background-color: DodgerBlue;
 }
 
 .problem {
-	height: 600px;
-	font-family: "Arial", sans-serif;
-	font-size: 28px;
-	text-align: justify;
-	padding: 60px 90px;
-	color: White;
-	background-color: DodgerBlue;
-}
-
-.sqlQuery {
-	font-family: "Arial", sans-serif;
-	font-size: 20px;
-	color: White;
-	text-shadow: 2px 2px 4px black;
+    height: 600px;
+    font-family: "Arial", sans-serif;
+    font-size: 28px;
+    text-align: justify;
+    padding: 60px 90px;
+    color: White;
+    background-color: DodgerBlue;
 }
 
 .button {
-	position: relative;
-	background-color: #33cc33;
-	border: none;
-	font-size: 22px;
-	color: #FFFFFF;
-	padding: 20px;
-	width: 150px;
-	text-align: center;
-	-webkit-transition-duration: 0.4s; /* Safari */
-	transition-duration: 0.4s;
-	text-decoration: none;
-	overflow: hidden;
-	cursor: pointer;
+    position: relative;
+	margin-left: 85%;
+    background-color: #33cc33;
+    border: none;
+    font-size: 22px;
+    color: #FFFFFF;
+    padding: 20px;
+    width: 150px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .button:hover {
-	box-shadow: 6px 6px 16px 0 rgba(0, 0, 0, 0.25), -6px 6px 16px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 6px 6px 16px 0 rgba(0, 0, 0, 0.25), -6px 6px 16px 0 rgba(0, 0, 0, 0.25);
 }
 
 .button:after {
-	content: "";
-	background: #98e698;
-	display: block;
-	position: absolute;
-	padding-top: 200%;
-	padding-left: 350%;
-	margin-left: -150px;
-	margin-top: -150px;
-	opacity: 0; /* final opacity */
-	transition-duration: 0.6s;
+    content: "";
+    background: #98e698;
+    display: block;
+    position: absolute;
+    padding-top: 200%;
+    padding-left: 350%;
+    margin-left: -150px;
+    margin-top: -150px;
+    opacity: 0; /* final opacity */
+    transition-duration: 0.6s;
 }
 
 .button:active:after { /* Generate an object after click */
-	padding: 0;
-	margin: 0;
-	opacity: 1;
-	transition: 0s;
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s;
+}
+
+.inputField {
+	width: 100%;
+	font-size: 20px;
 }
