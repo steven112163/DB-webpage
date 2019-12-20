@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <!--- Head --->
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" charset="UTF-8" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>DB-Practice</title>
     <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 <!--- End of Head --->
+
+<script src="interactionHandle.js"></script>
 
 <!--- Body --->
 <body>
@@ -28,7 +30,7 @@
         then list top 20.</p>
     <fieldset>
         <legend>SQL Query</legend>
-        <textarea class="inputField" rows="5"
+        <textarea id="text1" class="inputField" rows="5"
                   placeholder="SELECT matchId, MAX(DBNOs) AS DBNOs
 FROM player_statistic
 GROUP BY matchId
@@ -36,7 +38,7 @@ ORDER BY DBNOs DESC
 LIMIT 20;"></textarea>
     </fieldset>
     </br>
-    <button class="button">Send</button>
+    <button class="button" onclick="submitQuery('text1');">Send</button>
 </div>
 <!--- End of Problem 1 --->
 
@@ -49,13 +51,13 @@ LIMIT 20;"></textarea>
         total damage dealt (damageDealt) is between 2000 and 2010.</p>
     <fieldset>
         <legend>SQL Query</legend>
-        <textarea class="inputField" rows="3"
+        <textarea id="text2" class="inputField" rows="3"
                   placeholder="SELECT Id, matchId, damageDealt
 FROM player_statistic
 WHERE damageDealt BETWEEN 2000 AND 2010;"></textarea>
     </fieldset>
     </br>
-    <button class="button">Send</button>
+    <button class="button" onclick="submitQuery('text2');">Send</button>
 </div>
 <!--- End of Problem 2 --->
 
@@ -68,7 +70,7 @@ WHERE damageDealt BETWEEN 2000 AND 2010;"></textarea>
         number of each match type, then sort by the count from small to large.</p>
     <fieldset>
         <legend>SQL Query</legend>
-        <textarea class="inputField" rows="5"
+        <textarea id="text3" class="inputField" rows="5"
                   placeholder="SELECT matchType, COUNT(matchType) AS count
 FROM `match`
 WHERE matchType LIKE '%fpp%'
@@ -76,7 +78,7 @@ GROUP BY matchType
 ORDER BY COUNT(matchType);"></textarea>
     </fieldset>
     </br>
-    <button class="button">Send</button>
+    <button class="button" onclick="submitQuery('text3');">Send</button>
 </div>
 <!--- End of Problem 3 --->
 
@@ -90,7 +92,7 @@ ORDER BY COUNT(matchType);"></textarea>
         average number of kills in all games and their average number of kills (kills).</p>
     <fieldset>
 		<legend>SQL Query</legend>
-		<textarea class="inputField" rows="8"
+		<textarea id="text4" class="inputField" rows="8"
 				  placeholder="SELECT Id, AVG(kills) AS avgKills\n
 FROM (SELECT Id, matchId, kills FROM player_statistic) AS player
      JOIN
@@ -101,7 +103,7 @@ ORDER BY AVG(kills) DESC
 LIMIT 20;"></textarea>
 	</fieldset>
 	</br>
-    <button class="button">Send</button>
+    <button class="button" onclick="submitQuery('text4');">Send</button>
 </div>
 <!--- End of Problem 4 --->
 
@@ -114,14 +116,14 @@ LIMIT 20;"></textarea>
         and sort the result using average duration in ascending order.</p>
 	<fieldset>
 		<legend>SQL Query</legend>
-		<textarea class="inputField" rows="4"
+		<textarea id="text5" class="inputField" rows="4"
 				  placeholder="SELECT matchType, AVG(matchDuration)
 FROM `match`
 GROUP BY matchType
 ORDER BY AVG(matchDuration);"></textarea>
 	</fieldset>
 	</br>
-    <button class="button">Send</button>
+    <button class="button" onclick="submitQuery('text5');">Send</button>
 </div>
 <!--- End of Problem 5 --->
 
@@ -135,7 +137,7 @@ ORDER BY AVG(matchDuration);"></textarea>
         the total distance is from large to small. List the first 10 rows of data(using query).</p>
 	<fieldset>
 		<legend>SQL Query</legend>
-		<textarea class="inputField" rows="7"
+		<textarea id="text6" class="inputField" rows="7"
 				  placeholder="SELECT totalDistance, walkDistance, swimDistance, rideDistance
 FROM (SELECT walkDistance + swimDistance + rideDistance AS totalDistance, walkDistance, swimDistance, rideDistance
       FROM player_statistic
@@ -144,7 +146,7 @@ ORDER BY totalDistance DESC
 LIMIT 10;"></textarea>
 	</fieldset>
 	</br>
-    <button class="button">Send</button>
+    <button class="button" onclick="submitQuery('text6');">Send</button>
 </div>
 <!--- End of Problem 6 --->
 
@@ -159,7 +161,7 @@ LIMIT 10;"></textarea>
         medical supplies used (heals).</p>
 	<fieldset>
 		<legend>SQL Query</legend>
-		<textarea class="inputField" rows="9"
+		<textarea id="text7" class="inputField" rows="9"
 				  placeholder="SELECT COUNT(Id) AS numberOfPlayers, MAX(heals) AS maxHeals
 FROM (SELECT Id, matchId, damageDealt, winPlacePerc, heals
       FROM player_statistic
@@ -171,7 +173,7 @@ FROM (SELECT Id, matchId, damageDealt, winPlacePerc, heals
      USING(matchId);"></textarea>
 	</fieldset>
 	</br>
-    <button class="button">Send</button>
+    <button class="button" onclick="submitQuery('text7');">Send</button>
 </div>
 <!--- End of Problem 7 --->
 
@@ -185,7 +187,7 @@ FROM (SELECT Id, matchId, damageDealt, winPlacePerc, heals
         the total number of kills by descending order.</p>
 	<fieldset>
 		<legend>SQL Query</legend>
-		<textarea class="inputField" rows="11"
+		<textarea id="text8" class="inputField" rows="11"
 				  placeholder="SELECT teamRoadKills, AVG(winPlacePerc) AS avgWinPlacePerc
 FROM (SELECT matchId, SUM(roadKills) AS teamRoadKills, AVG(winPlacePerc) AS winPlacePerc
       FROM player_statistic
@@ -199,7 +201,7 @@ GROUP BY teamRoadKills
 ORDER BY teamRoadKills DESC;"></textarea>
 	</fieldset>
 	</br>
-    <button class="button">Send</button>
+    <button class="button" onclick="submitQuery('text8');">Send</button>
 </div>
 <!--- End of Problem 8 --->
 
@@ -212,7 +214,7 @@ ORDER BY teamRoadKills DESC;"></textarea>
         Sort the weaponAcquired in descending order and list first 20 players.</p>
 	<fieldset>
 		<legend>SQL Query</legend>
-		<textarea class="inputField" rows="5"
+		<textarea id="text9" class="inputField" rows="5"
 				  placeholder="SELECT Id, weaponsAcquired, damageDealt
 FROM player_statistic
 WHERE damageDealt = 0
@@ -220,7 +222,7 @@ ORDER BY weaponsAcquired DESC
 LIMIT 20;"></textarea>
 	</fieldset>
 	</br>
-    <button class="button">Send</button>
+    <button class="button" onclick="submitQuery('text9');">Send</button>
 </div>
 <!--- End of Problem Bonus --->
 
