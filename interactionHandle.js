@@ -4,11 +4,34 @@
  */
 
 
-//----------------------------------------------
+//--------------------------------------------------------
 /**
  * Submit query to server side
  * @param {String} Id ID of textarea of submitted query
  */
 function submitQuery(Id) {
-    // TODO
+    let query = document.getElementById(Id).value;
+    $.post("queryHandle.js",
+        {
+            query: query
+        },
+        function (data, status, xmlHttpRequest) {
+            if (status == "success") {
+                printResult(Id, data);
+            } else if (status == "error") {
+                alert(status);
+                alert(xmlHttpRequest);
+            }
+        });
+}
+
+
+//--------------------------------------------------------
+/**
+ * Output query results in the table
+ * @param {String} Id ID of textarea of submitted query
+ * @param {Object} data Data of queried results
+ */
+function printResult(Id, data) {
+    console.log(data);
 }

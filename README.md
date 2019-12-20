@@ -10,3 +10,4 @@ Just for practice
 | index.html | Web page |
 | mystyle.css | html output format |
 | interactionHandle.js | User interaction handling |
+| queryHandle.js | Node.js server for query handling |
