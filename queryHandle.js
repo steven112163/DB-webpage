@@ -13,6 +13,9 @@ const url = require('url');
 /**@global Node.js file system object for getting html file */
 const fs = require('fs');
 
+/**@global Node.js SQL object for retrieving data from MySQL */
+const mysql = require('mysql');
+
 /**@global Server IP address */
 const hostname = "127.0.0.1";
 
@@ -25,6 +28,32 @@ const files = ['/interactionHandle.js', '/mystyle.css', '/bgimg-0.png', '/bgimg-
     , '/bgimg-6.png', '/bgimg-7.png', '/bgimg-8.jpg', '/bgimg-9.png'];
 
 
+//--------------------------------------------------------
+/**
+ * Construct database connection
+ */
+const con = mysql.createConnection({
+    host: "localhost",
+    user: "webuser",
+    password: "!MyPassword123"
+});
+
+
+//--------------------------------------------------------
+/**
+ * Test database connection
+ */
+con.connect(function (err) {
+    if (err)
+        throw err;
+    console.log("* Database connected");
+});
+
+
+//--------------------------------------------------------
+/**
+ * Construct server
+ */
 const server = http.createServer(function (req, res) {
     let pathName = url.parse(req.url, true).pathname;
 
@@ -53,15 +82,20 @@ const server = http.createServer(function (req, res) {
         let queryData = url.parse(req.url, true).query;
         res.writeHead(200, {'Content-Type': 'text/plain'});
         if (typeof queryData.query != 'undefined' && queryData.query) {
-            res.end("hi");
+            res.end("Server: hi");
         } else
-            res.end("There is no query in your request!!!");
+            res.end("Server: There is no query in your request!!!");
     } else {
         res.writeHead(404);
         res.end();
     }
 });
 
+
+//--------------------------------------------------------
+/**
+ * Start server
+ */
 server.listen(port, hostname, () => {
-    console.log("Server running at http://" + hostname + ":" + port + "/");
+    console.log("* Server running at http://" + hostname + ":" + port + "/");
 });

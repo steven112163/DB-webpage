@@ -11,6 +11,8 @@
  */
 function submitQuery(Id) {
     let query = document.getElementById(Id).value;
+    if(query == "")
+        query = document.getElementById(Id).placeholder;
     console.log(query);
     $.get("queryHandle.js",
         {
