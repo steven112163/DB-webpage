@@ -21,7 +21,7 @@ function submitQuery(Id) {
         },
         function (data, status, xmlHttpRequest) {
             if (status == "success") {
-                printResult(Id, data);
+                printResult(Id[Id.length - 1], data);
             } else if (status == "error") {
                 alert(status);
                 alert(xmlHttpRequest);
@@ -34,9 +34,32 @@ function submitQuery(Id) {
 /**
  * Output query results in the table
  * @param {String} Id ID of textarea of submitted query
- * @param {Object} data Data of queried results
+ * @param {String} data Data of queried results
  */
 function printResult(Id, data) {
-    console.log(data);
-    // TODO: show data in the table
+    try {
+        let objData = JSON.parse(data);
+        console.log(objData);
+        let keys = Object.keys(objData[0]);
+        let table = "<table><tr>";
+
+        for (let key of keys)
+            table += "<th>" + key + "</th>";
+        table += "</tr>";
+
+        for (let eachData of objData) {
+            table += "<tr>";
+            for (let key of keys)
+                table += "<td>" + eachData[key] + "</td>";
+            table += "</tr>";
+        }
+        table += "</table>";
+        console.log(table);
+        console.log(Id);
+
+        document.getElementById("t" + Id).innerHTML = table;
+    } catch (err) {
+        throw err;
+    }
+
 }

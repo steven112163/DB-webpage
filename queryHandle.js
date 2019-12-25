@@ -23,9 +23,10 @@ const hostname = "127.0.0.1";
 const port = 8080;
 
 /**@global List of files for web page */
-const files = ['/interactionHandle.js', '/mystyle.css', '/bgimg-0.png', '/bgimg-1.png'
-    , '/bgimg-2.png', '/bgimg-3.png', '/bgimg-4.png', '/bgimg-5.png'
-    , '/bgimg-6.png', '/bgimg-7.png', '/bgimg-8.jpg', '/bgimg-9.png'];
+const files = ["/interactionHandle.js", "/mystyle.css", "/images/bgimg-0.png",
+    "/images/bgimg-1.png", "/images/bgimg-2.png", "/images/bgimg-3.png",
+    "/images/bgimg-4.png", "/images/bgimg-5.png", "/images/bgimg-6.png",
+    "/images/bgimg-7.png", "/images/bgimg-8.jpg", "/images/bgimg-9.png"];
 
 
 //--------------------------------------------------------
@@ -47,7 +48,8 @@ const con = mysql.createConnection({
 con.connect(function (err) {
     if (err)
         throw err;
-    console.log("* Database connected\n");
+    console.log("* Database connected");
+    console.log("* Use Ctrl+c to terminate server\n");
 });
 
 
@@ -57,6 +59,7 @@ con.connect(function (err) {
  */
 const server = http.createServer(function (req, res) {
     let pathName = url.parse(req.url, true).pathname;
+    console.log("* Get: " + pathName);
 
     if (pathName == "/") {
         // Pass html to client
@@ -71,9 +74,8 @@ const server = http.createServer(function (req, res) {
     } else if (files.indexOf(pathName) >= 0) {
         // Pass other files to client
         fs.readFile("." + pathName, function (err, file) {
-            if (err) {
+            if (err)
                 throw err;
-            }
 
             res.writeHead(200);
             res.end(file);

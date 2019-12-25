@@ -1,7 +1,8 @@
 *
-!*.png
 !*.html
 !*.css
 !*.js
+!images/
+!images/*
 !README.md
 !.gitignore
