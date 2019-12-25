@@ -1,5 +1,5 @@
 /**
- * @file A simple Node.js file for handling queries
+ * @file A simple Node.js server for handling queries
  * @author Yu-Hsun Yuan <steven112163@gmail.com>
  */
 
@@ -35,7 +35,8 @@ const files = ['/interactionHandle.js', '/mystyle.css', '/bgimg-0.png', '/bgimg-
 const con = mysql.createConnection({
     host: "localhost",
     user: "webuser",
-    password: "!MyPassword123"
+    password: "!MyPassword123",
+    database: "IDB"
 });
 
 
@@ -46,7 +47,7 @@ const con = mysql.createConnection({
 con.connect(function (err) {
     if (err)
         throw err;
-    console.log("* Database connected");
+    console.log("* Database connected\n");
 });
 
 
@@ -80,9 +81,17 @@ const server = http.createServer(function (req, res) {
     } else if (pathName == "/queryHandle.js") {
         // Handle query and response results
         let queryData = url.parse(req.url, true).query;
+        let query = queryData.query;
+        let problemNum = queryData.problemNumber;
         res.writeHead(200, {'Content-Type': 'text/plain'});
-        if (typeof queryData.query != 'undefined' && queryData.query) {
-            res.end("Server: hi");
+        if (typeof query != 'undefined' && query && typeof problemNum != 'undefined' && problemNum) {
+            console.log("* Retrieving data of problem " + problemNum + " from database...");
+            con.query(query, function (err, result) {
+                if (err)
+                    throw err;
+                res.end(JSON.stringify(result));
+                console.log("** Data transmitted\n");
+            });
         } else
             res.end("Server: There is no query in your request!!!");
     } else {

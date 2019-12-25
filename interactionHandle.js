@@ -11,11 +11,12 @@
  */
 function submitQuery(Id) {
     let query = document.getElementById(Id).value;
-    if(query == "")
+    if (query == "")
         query = document.getElementById(Id).placeholder;
     console.log(query);
     $.get("queryHandle.js",
         {
+            problemNumber: Id[Id.length - 1],
             query: query
         },
         function (data, status, xmlHttpRequest) {
@@ -37,4 +38,5 @@ function submitQuery(Id) {
  */
 function printResult(Id, data) {
     console.log(data);
+    // TODO: show data in the table
 }
