@@ -21,7 +21,7 @@ function submitQuery(Id) {
         },
         function (data, status, xmlHttpRequest) {
             if (status == "success") {
-                printResult(Id[Id.length - 1], data);
+                printResult("t" + Id[Id.length - 1], data);
             } else if (status == "error") {
                 alert(status);
                 alert(xmlHttpRequest);
@@ -33,7 +33,7 @@ function submitQuery(Id) {
 //--------------------------------------------------------
 /**
  * Output query results in the table
- * @param {String} Id ID of textarea of submitted query
+ * @param {String} Id ID of table
  * @param {String} data Data of queried results
  */
 function printResult(Id, data) {
@@ -41,23 +41,21 @@ function printResult(Id, data) {
         let objData = JSON.parse(data);
         console.log(objData);
         let keys = Object.keys(objData[0]);
-        let table = "<table><tr>";
+        let table = "<table><tr><th></th>";
 
         for (let key of keys)
             table += "<th>" + key + "</th>";
         table += "</tr>";
 
-        for (let eachData of objData) {
-            table += "<tr>";
+        for (let index = 0; index < objData.length; index++) {
+            table += "<tr><td>" + (index + 1) + "</td>";
             for (let key of keys)
-                table += "<td>" + eachData[key] + "</td>";
+                table += "<td>" + objData[index][key] + "</td>";
             table += "</tr>";
         }
         table += "</table>";
-        console.log(table);
-        console.log(Id);
 
-        document.getElementById("t" + Id).innerHTML = table;
+        document.getElementById(Id).innerHTML = table;
     } catch (err) {
         throw err;
     }

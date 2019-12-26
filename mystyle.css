@@ -3,6 +3,21 @@ body, html {
     margin: 0;
 }
 
+table {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    color: Black;
+}
+
+tr:nth-child(even) {
+    background-color: #EEEEEE;
+}
+
+tr:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
 .startEnd, .bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4,
 .bgimg-5, .bgimg-6, .bgimg-7, .bgimg-8, .bgimg-9 {
     position: relative;
@@ -75,11 +90,11 @@ body, html {
 }
 
 .problem {
-    height: 600px;
+    height: 800px;
     font-family: "Arial", sans-serif;
     font-size: 28px;
     text-align: justify;
-    padding: 60px 90px;
+    padding: 40px 60px;
     color: White;
     background-color: DodgerBlue;
 }
@@ -128,4 +143,9 @@ body, html {
 .inputField {
     width: 100%;
     font-size: 20px;
+}
+
+.scrollingContainer {
+    height: 100%;
+    overflow: auto;
 }
