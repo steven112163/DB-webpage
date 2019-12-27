@@ -38,10 +38,10 @@ GROUP BY matchId
 ORDER BY DBNOs DESC
 LIMIT 20;"></textarea>
     </fieldset>
-    </br>
-    <button class="button" onclick="submitQuery('text1');">Send</button>
-    </br>
-    <div id="t1" class="scrollingContainer"></div>
+    <div class="buttonRegion">
+        <button class="button" onclick="submitQuery('text1');">Send</button>
+    </div>
+    <div id="t1" class="scrollingTable"></div>
 </div>
 <!--- End of Problem 1 --->
 
@@ -60,7 +60,10 @@ FROM player_statistic
 WHERE damageDealt BETWEEN 2000 AND 2010;"></textarea>
     </fieldset>
     </br>
-    <button class="button" onclick="submitQuery('text2');">Send</button>
+    <div class="buttonRegion">
+        <button class="button" onclick="submitQuery('text2');">Send</button>
+    </div>
+    <div id="t2" class="scrollingTable"></div>
 </div>
 <!--- End of Problem 2 --->
 
@@ -80,8 +83,10 @@ WHERE matchType LIKE '%fpp%'
 GROUP BY matchType
 ORDER BY COUNT(matchType);"></textarea>
     </fieldset>
-    </br>
-    <button class="button" onclick="submitQuery('text3');">Send</button>
+    <div class="buttonRegion">
+        <button class="button" onclick="submitQuery('text3');">Send</button>
+    </div>
+    <div id="t3" class="scrollingTable"></div>
 </div>
 <!--- End of Problem 3 --->
 
@@ -96,7 +101,7 @@ ORDER BY COUNT(matchType);"></textarea>
     <fieldset>
         <legend>SQL Query</legend>
         <textarea id="text4" class="inputField" rows="8"
-                  placeholder="SELECT Id, AVG(kills) AS avgKills\n
+                  placeholder="SELECT Id, AVG(kills) AS avgKills
 FROM (SELECT Id, matchId, kills FROM player_statistic) AS player
      JOIN
      (SELECT matchId FROM `match` WHERE numGroups <= 10) AS matchIdOnly
@@ -105,8 +110,10 @@ GROUP BY Id
 ORDER BY AVG(kills) DESC
 LIMIT 20;"></textarea>
     </fieldset>
-    </br>
-    <button class="button" onclick="submitQuery('text4');">Send</button>
+    <div class="buttonRegion">
+        <button class="button" onclick="submitQuery('text4');">Send</button>
+    </div>
+    <div id="t4" class="scrollingTable"></div>
 </div>
 <!--- End of Problem 4 --->
 
@@ -125,8 +132,10 @@ FROM `match`
 GROUP BY matchType
 ORDER BY AVG(matchDuration);"></textarea>
     </fieldset>
-    </br>
-    <button class="button" onclick="submitQuery('text5');">Send</button>
+    <div class="buttonRegion">
+        <button class="button" onclick="submitQuery('text5');">Send</button>
+    </div>
+    <div id="t5" class="scrollingTable"></div>
 </div>
 <!--- End of Problem 5 --->
 
@@ -148,8 +157,10 @@ FROM (SELECT walkDistance + swimDistance + rideDistance AS totalDistance, walkDi
 ORDER BY totalDistance DESC
 LIMIT 10;"></textarea>
     </fieldset>
-    </br>
-    <button class="button" onclick="submitQuery('text6');">Send</button>
+    <div class="buttonRegion">
+        <button class="button" onclick="submitQuery('text6');">Send</button>
+    </div>
+    <div id="t6" class="scrollingTable"></div>
 </div>
 <!--- End of Problem 6 --->
 
@@ -175,8 +186,10 @@ FROM (SELECT Id, matchId, damageDealt, winPlacePerc, heals
       WHERE matchDuration > ALL (SELECT AVG(matchDuration) AS avgDuration FROM `match`)) AS targetMatch
      USING(matchId);"></textarea>
     </fieldset>
-    </br>
-    <button class="button" onclick="submitQuery('text7');">Send</button>
+    <div class="buttonRegion">
+        <button class="button" onclick="submitQuery('text7');">Send</button>
+    </div>
+    <div id="t7" class="scrollingTable"></div>
 </div>
 <!--- End of Problem 7 --->
 
@@ -203,8 +216,10 @@ FROM (SELECT matchId, SUM(roadKills) AS teamRoadKills, AVG(winPlacePerc) AS winP
 GROUP BY teamRoadKills
 ORDER BY teamRoadKills DESC;"></textarea>
     </fieldset>
-    </br>
-    <button class="button" onclick="submitQuery('text8');">Send</button>
+    <div class="buttonRegion">
+        <button class="button" onclick="submitQuery('text8');">Send</button>
+    </div>
+    <div id="t8" class="scrollingTable"></div>
 </div>
 <!--- End of Problem 8 --->
 
@@ -224,8 +239,10 @@ WHERE damageDealt = 0
 ORDER BY weaponsAcquired DESC
 LIMIT 20;"></textarea>
     </fieldset>
-    </br>
-    <button class="button" onclick="submitQuery('text9');">Send</button>
+    <div class="buttonRegion">
+        <button class="button" onclick="submitQuery('text9');">Send</button>
+    </div>
+    <div id="t9" class="scrollingTable"></div>
 </div>
 <!--- End of Problem Bonus --->
 
